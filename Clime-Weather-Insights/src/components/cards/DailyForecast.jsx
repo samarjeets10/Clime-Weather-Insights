@@ -1,25 +1,31 @@
 import Card from './Card'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { getWeather } from '../../api'
-function DailyForecast() {
+import { WeatherIcons } from '../../utils/WeatherIcons'
 
-    const {data} = useSuspenseQuery({
-        queryKey: ['weather'],
-        queryFn: () => getWeather({lat: 50, lon: 50})
-    });
-
-    const daily = JSON.stringify(data?.daily ?? {}).slice(0, 100);
-
+function DailyForecast({ daily }) {
   return (
     <Card title="Daily Forecast">
-        <div className='flex flex-col gap-4'>
-            {data.daily.temperature_2m_max(day => (
-                <div key={day.dt} className="flex justify-between">
-                    <p>DATE</p>
-                    
-                </div>
-            ))}
-        </div>
+      <div className='flex flex-col gap-4'>
+        {daily?.time?.map((date, index) => {
+          const code = daily?.weather_code?.[index]
+          const info = WeatherIcons(code)
+
+          const day = daily?.temperature_2m_mean?.[index];
+          const max = daily?.temperature_2m_max?.[index];
+          const min = daily?.temperature_2m_min?.[index];
+
+          return (
+            <div key={date} className='flex justify-between items-center'>
+              <p className='w-9'>{new Date(date + 'T00:00:00').toLocaleDateString('en-US', {
+                weekday: 'short'
+              })}</p>
+              <div className='flex justify-center items-center'>{info.icon}</div>
+              <p className='text-center'>{Math.round(day)}°C</p>
+              <p className='text-center text-gray-500/75'>{Math.round(max)}°C</p>
+              <p className='text-center text-gray-500/75'>{Math.round(min)}°C</p>
+            </div>
+          )
+        })}
+      </div>
     </Card>
   )
 }

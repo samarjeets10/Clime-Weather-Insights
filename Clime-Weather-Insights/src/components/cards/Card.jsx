@@ -1,5 +1,4 @@
 import React from 'react'
-
 function Card({children, title}) {
   return (
     <div className='p-4 rounded-xl bg-zinc-900 shadow-md flex flex-col gap-4'>
