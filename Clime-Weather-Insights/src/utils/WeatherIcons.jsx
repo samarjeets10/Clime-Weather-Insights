@@ -15,7 +15,9 @@ import {
 
 export function WeatherIcons(code, size = "w-8 h-8") {
   const weatherMap = {
-    0:  { label: "Clear sky", icon: <Sun className={clsx(size, "text-yellow-500")} /> },
+    0:  { label: "Clear sky", 
+          icon: <Sun className={clsx(size, "text-yellow-500")} /> 
+        },
     1:  { label: "Mainly clear", icon: <CloudSun className={clsx(size, "text-yellow-400")} /> },
     2:  { label: "Partly cloudy", icon: <CloudSun className={clsx(size, "text-slate-400")} /> },
     3:  { label: "Overcast", icon: <Cloud className={clsx(size, "text-slate-500")} /> },

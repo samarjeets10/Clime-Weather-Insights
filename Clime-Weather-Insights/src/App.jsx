@@ -4,6 +4,7 @@ import DailyForecast from './components/cards/DailyForecast'
 import HourlyForecast from './components/cards/HourlyForecast'
 import CurrentWeather from './components/cards/CurrentWeather'
 import AdditionalInfo from './components/cards/AdditionalInfo'
+import Map from './components/cards/Map'
 
 function App() {
   const { data } = useQuery({
@@ -13,6 +14,7 @@ function App() {
 
   return (
     <div className='flex flex-col gap-8'>
+      <Map />
       <CurrentWeather current={data?.current} timeZone={data?.timezone} />
       <HourlyForecast hourly={data?.hourly} />
       <DailyForecast daily={data?.daily} />
