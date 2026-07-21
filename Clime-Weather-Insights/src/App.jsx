@@ -5,19 +5,27 @@ import HourlyForecast from './components/cards/HourlyForecast'
 import CurrentWeather from './components/cards/CurrentWeather'
 import AdditionalInfo from './components/cards/AdditionalInfo'
 import Map from './components/cards/Map'
+import { useState } from 'react'
 
 function App() {
+
+  const [coords, setCoords] = useState({lat: 10, lon: 29});
+
   const { data } = useQuery({
-    queryKey: ['weather'],
-    queryFn: () => getWeather({ lat: 16, lon: 74 })
+    queryKey: ['weather', coords.lat, coords.lon],
+    queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon })
   })
+
+  const onMapClick = (lat, lon) => {
+    setCoords({lat, lon});
+  }
 
   return (
     <div className='flex flex-col gap-8'>
-      <Map />
+      <Map coords={coords} onMapClick={onMapClick} />
       <CurrentWeather current={data?.current} timeZone={data?.timezone} />
       <HourlyForecast hourly={data?.hourly} />
-      <DailyForecast daily={data?.daily} />
+      <DailyForecast daily={data?.daily}  />
       <AdditionalInfo current={data?.current} daily={data?.daily} />
     </div>
   )
