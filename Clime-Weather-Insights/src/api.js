@@ -50,3 +50,24 @@ export async function getWeather({ lat, lon }) {
         throw Error(`Something went wrong! ${error.message}`, {cause: error});
     }
 }
+
+
+export async function getGeoCode(location) {
+    try {
+
+      const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=5&language=en&format=json`;
+
+      const resp = await fetch(url);
+
+      if (!resp.ok) {
+        throw new Error(`Geocoding API returned ${resp.status}`);
+      }
+
+      const  data = await resp.json();
+      
+
+    } catch (error) {
+      throw Error(`Something went wrong! ${error.message}`, {cause: error})
+    }
+
+}

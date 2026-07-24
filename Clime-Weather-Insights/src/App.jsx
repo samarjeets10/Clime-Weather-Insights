@@ -6,6 +6,7 @@ import CurrentWeather from './components/cards/CurrentWeather'
 import AdditionalInfo from './components/cards/AdditionalInfo'
 import Map from './components/cards/Map'
 import { useState } from 'react'
+import LocationDropdown from './components/dropdowns/LocationDropdown'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className='flex flex-col gap-8'>
+      <LocationDropdown />
       <Map coords={coords} onMapClick={onMapClick} />
       <CurrentWeather current={data?.current} timeZone={data?.timezone} />
       <HourlyForecast hourly={data?.hourly} />
