@@ -7,11 +7,13 @@ import AdditionalInfo from './components/cards/AdditionalInfo'
 import Map from './components/cards/Map'
 import { useState } from 'react'
 import LocationDropdown from './components/dropdowns/LocationDropdown'
+import MapTypeDropdown from './components/dropdowns/MapTypeDropdown'
 
 function App() {
 
   const [coordinates, setCoords] = useState({lat: 16, lon: 74});
   const [location, setLocation] = useState('Mumbai');
+  const [mapType, setMapType] = useState('clouds_new');
 
   const { data: geoCodeData } = useQuery({
     queryKey: ['geocode', location],
@@ -38,12 +40,29 @@ function App() {
 
   return (
     <div className='flex flex-col gap-8'>
-      <LocationDropdown location={location} setLocation={setLocation} />
-      <Map coords={coords} onMapClick={onMapClick} />
+
+      <div className='flex gap-8'>
+
+        <div className='flex items-center gap-4'>
+          <h1 className='text-2xl font-semibold'>Location: </h1>
+          <LocationDropdown location={location} setLocation={setLocation} />
+        </div>
+
+        <div className='flex items-center gap-4'>
+          <h1 className='text-2xl font-semibold'>Map Type:</h1>
+          <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
+        </div>
+      
+      </div>
+
+      <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
+
       <CurrentWeather current={data?.current} timeZone={data?.timezone} />
+
       <HourlyForecast hourly={data?.hourly} />
       <DailyForecast daily={data?.daily}  />
       <AdditionalInfo current={data?.current} daily={data?.daily} />
+
     </div>
   )
 }

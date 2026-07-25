@@ -1,10 +1,11 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker } from 'react-leaflet'
 import "leaflet/dist/leaflet.css"
 import MapClick from './MapClick'
+import MapTileLayer from './MapTileLayer';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-function Map({ coords, onMapClick }) {
+function Map({ coords, onMapClick, mapType }) {
 
     const {lat, lon} = coords;
 
@@ -13,12 +14,16 @@ function Map({ coords, onMapClick }) {
     center={[lat, lon]} 
     zoom={5} 
     scrollWheelZoom={true} 
-    style={{ width: "800px", height: "500px"}}>
-        <TileLayer
+    style={{ width: "100%", height: "500px"}}>
+
+        {/* <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <TileLayer url={`https://tile.openweathermap.org/map/${layer}/{z}/{x}/{y}.png?appid=${API_KEY}`} />
+        /> */}
+
+        <MapTileLayer />
+       
+        <TileLayer key={mapType} url={`https://tile.openweathermap.org/map/${mapType}/{z}/{x}/{y}.png?appid=${API_KEY}`} />
         <MapClick onMapClick={onMapClick} coords={coords} />
         <Marker position={[lat, lon]} />
     </MapContainer>
