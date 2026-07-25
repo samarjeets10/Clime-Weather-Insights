@@ -1,5 +1,6 @@
+import { geocodeSchema } from "./schemas/geoCodeSchema";
 import { weatherSchema } from "./schemas/weatherSchemas";
-// const API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = "https://api.open-meteo.com/v1/forecast";
 
 const CURRENT_PARAMS = [
@@ -64,7 +65,7 @@ export async function getGeoCode(location) {
       }
 
       const  data = await resp.json();
-      
+      return geocodeSchema.parse(data);
 
     } catch (error) {
       throw Error(`Something went wrong! ${error.message}`, {cause: error})

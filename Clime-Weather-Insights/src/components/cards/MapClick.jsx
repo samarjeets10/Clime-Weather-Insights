@@ -1,12 +1,12 @@
 import { useMap } from 'react-leaflet';
 
-function MapClick({ onMapClick }) {
+function MapClick({ onMapClick, coords }) {
 
     const map = useMap();
+    map.panTo([coords.lat, coords.lon])
 
     map.on('click', (e) => {
         const { lat, lng } = e.latlng;
-        map.panTo([lat, lng]);
         onMapClick(lat, lng);
     })
 

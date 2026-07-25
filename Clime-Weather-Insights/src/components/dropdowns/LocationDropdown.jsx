@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-function LocationDropdown() {
+function LocationDropdown({ location, setLocation }) {
 
     const Locations = [
         "New York",
@@ -26,7 +26,7 @@ function LocationDropdown() {
 
 
   return (
-    <Select>
+    <Select value={location} onValueChange={(value) => setLocation(value)} >
     <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Theme" />
     </SelectTrigger>

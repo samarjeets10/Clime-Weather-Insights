@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const geocodingSchema = z.object({
+export const geocodeSchema = z.object({
   results: z.array(
     z.object({
       id: z.number(),
