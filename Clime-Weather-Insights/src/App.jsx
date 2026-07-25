@@ -8,6 +8,7 @@ import Map from './components/cards/Map'
 import { useState } from 'react'
 import LocationDropdown from './components/dropdowns/LocationDropdown'
 import MapTypeDropdown from './components/dropdowns/MapTypeDropdown'
+import MapLegend from './components/cards/MapLegend'
 
 function App() {
 
@@ -55,7 +56,10 @@ function App() {
       
       </div>
 
-      <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
+      <div className='relative'>
+         <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
+         <MapLegend mapType={mapType} />
+      </div>
 
       <CurrentWeather current={data?.current} timeZone={data?.timezone} />
 
