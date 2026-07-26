@@ -1,8 +1,17 @@
-import React from 'react'
 import Card from './Card'
 import { WeatherIcons } from '../../utils/WeatherIcons';
+import { getWeather } from '@/api';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-function HourlyForecast({ hourly }) {
+function HourlyForecast({ coords }) {
+
+    const { data } = useSuspenseQuery({
+        queryKey: ['weather', coords.lat, coords.lon],
+        queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon })
+    })
+
+    const hourly = data?.hourly;
+
   return (
     <Card title="Hourly Forecast (48 Hours)" childrenClassName="flex flex-row gap-6 overflow-x-scroll">
         {

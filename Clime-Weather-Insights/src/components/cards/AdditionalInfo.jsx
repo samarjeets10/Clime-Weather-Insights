@@ -5,9 +5,19 @@ import Card from './Card'
  import Pressure from '../../assets/pressure.svg?react'
  import Wind from '../../assets/wind.svg?react'
  import Uv from '../../assets/uv.svg?react'
+ import { useSuspenseQuery } from '@tanstack/react-query'
+ import { getWeather } from '@/api'
 
 
-function AdditionalInfo({current, daily}) {
+function AdditionalInfo({ coords }) {
+
+    const { data } = useSuspenseQuery({
+        queryKey: ['weather', coords.lat, coords.lon],
+        queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon })
+    })
+
+    const current = data?.current;
+    const daily = data?.daily;
     
     const sunrise = daily?.sunrise[0];
     const sunset = daily?.sunset[0]; 

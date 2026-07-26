@@ -1,8 +1,16 @@
 import Card from './Card'
 import { WeatherIcons } from '../../utils/WeatherIcons'
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { getWeather } from '@/api';
 
-function CurrentWeather({ current, timeZone }) {
+function CurrentWeather({ timeZone, coords }) {
 
+    const { data } = useSuspenseQuery({
+        queryKey: ['weather', coords.lat, coords.lon],
+        queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon })
+    })
+
+    const current = data?.current;
     const code = current?.weather_code;
     const info = WeatherIcons(code, "w-12 h-12");
     const localTime = current?.time ? 

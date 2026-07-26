@@ -1,4 +1,3 @@
-import React from 'react'
 
 function MapLegend({ mapType }) {
 
@@ -86,7 +85,7 @@ function MapLegend({ mapType }) {
     const gradientStops = legend.stops.map((stop) => `${stop.color} ${(stop.value / maxValue) * 100}%`).join(", ")
 
   return (
-    <div className='absolute right-4 top-4 z-[1000] w-96  rounded-xl shadow-lg p-4 bg-background/60 border border-accent/70 flex flex-col gap-3'>
+    <div className='absolute right-4 top-4 z-1000 w-96  rounded-xl shadow-lg p-4 bg-background/60 border border-accent/70 flex flex-col gap-3'>
         <h3 className='text-sm font-semibold text-foreground'>{legend.title}</h3>
         <div
         className='w-full h-6 rounded-xl border border-accent/70' 

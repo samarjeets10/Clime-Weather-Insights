@@ -1,7 +1,17 @@
 import Card from './Card'
 import { WeatherIcons } from '../../utils/WeatherIcons'
+import { getWeather } from '@/api'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
-function DailyForecast({ daily }) {
+function DailyForecast({ coords }) {
+
+  const { data } = useSuspenseQuery({
+    queryKey: ['weather', coords.lat, coords.lon],
+    queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon })
+  })
+
+  const daily = data?.daily;
+
   return (
     <Card title="Daily Forecast" childrenClassName="flex flex-col gap-4">
         {daily?.time?.map((date, index) => {

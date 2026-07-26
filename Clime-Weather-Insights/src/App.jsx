@@ -1,14 +1,15 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { getGeoCode, getWeather } from './api'
 import DailyForecast from './components/cards/DailyForecast'
 import HourlyForecast from './components/cards/HourlyForecast'
 import CurrentWeather from './components/cards/CurrentWeather'
 import AdditionalInfo from './components/cards/AdditionalInfo'
 import Map from './components/cards/Map'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import LocationDropdown from './components/dropdowns/LocationDropdown'
 import MapTypeDropdown from './components/dropdowns/MapTypeDropdown'
 import MapLegend from './components/cards/MapLegend'
+import CurrentSkeleton from './components/skeletons/CurrentSkeleton'
 
 function App() {
 
@@ -16,10 +17,9 @@ function App() {
   const [location, setLocation] = useState('Mumbai');
   const [mapType, setMapType] = useState('clouds_new');
 
-  const { data: geoCodeData } = useQuery({
+  const { data: geoCodeData } = useSuspenseQuery({
     queryKey: ['geocode', location],
     queryFn: () => getGeoCode(location),
-    enabled: location !== 'custom',
   });
 
   const coords = location === 'custom' ? coordinates : {
@@ -27,7 +27,7 @@ function App() {
     lon: geoCodeData?.results?.[0]?.longitude ?? coordinates.lon
   }
 
-  const { data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ['weather', coords.lat, coords.lon],
     queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon })
   })
@@ -61,11 +61,22 @@ function App() {
          <MapLegend mapType={mapType} />
       </div>
 
-      <CurrentWeather current={data?.current} timeZone={data?.timezone} />
+      <Suspense fallback={<CurrentSkeleton />} >
+        <CurrentWeather coords={coords} timeZone={data?.timezone} />
+      </Suspense>
 
-      <HourlyForecast hourly={data?.hourly} />
-      <DailyForecast daily={data?.daily}  />
-      <AdditionalInfo current={data?.current} daily={data?.daily} />
+      <Suspense fallback={<CurrentSkeleton />}>
+        <HourlyForecast coords={coords} />
+      </Suspense>
+
+      <Suspense fallback={<CurrentSkeleton />}>
+        <DailyForecast coords={coords} />
+      </Suspense>
+
+      <Suspense fallback={<CurrentSkeleton />}>
+        <AdditionalInfo coords={coords} />
+      </Suspense>
+    
 
     </div>
   )
