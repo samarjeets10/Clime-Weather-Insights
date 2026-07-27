@@ -1,8 +1,21 @@
-import React from 'react'
+import Card from '../cards/Card'
+import { Skeleton } from '../ui/skeleton'
 
 function AdditionalInfoSkeleton() {
   return (
-    <div>AdditionalInfoSkeleton</div>
+    <Card title="Additional Weather Info" childrenClassName="flex flex-col gap-8">
+        {
+            Array.from({length: 6}).map((index) => (
+                <div key={index} className='flex justify-between'>
+                    <div className='flex items-center gap-4'>
+                        <Skeleton className='h-8 w-20' />
+                        <Skeleton className='size-8 rounded-full' />
+                    </div>
+                    <Skeleton className='size-8' />
+                </div>
+            ))
+        }
+    </Card>
   )
 }
 

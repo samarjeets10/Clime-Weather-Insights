@@ -9,12 +9,19 @@ function MapClick({ onMapClick, coords }) {
     map.panTo([coords.lat, coords.lon]);
   }, [map, coords.lat, coords.lon]);
 
-   useEffect(() => {
-    map.on('click', (e) => {
+  useEffect(() => {
+    function handleClick(e) {
       const { lat, lng } = e.latlng;
       onMapClick(lat, lng);
-    })
-   }, [map, onMapClick]);
+    }
+
+    map.on('click', handleClick);
+
+    return () => {
+      map.off('click', handleClick);
+    }
+
+  }, [map, onMapClick]);
 
   return null;
 }

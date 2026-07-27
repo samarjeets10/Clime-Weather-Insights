@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { getGeoCode, getWeather } from './api'
+import { getGeoCode } from './api'
 import DailyForecast from './components/cards/DailyForecast'
 import HourlyForecast from './components/cards/HourlyForecast'
 import CurrentWeather from './components/cards/CurrentWeather'
@@ -10,6 +10,9 @@ import LocationDropdown from './components/dropdowns/LocationDropdown'
 import MapTypeDropdown from './components/dropdowns/MapTypeDropdown'
 import MapLegend from './components/cards/MapLegend'
 import CurrentSkeleton from './components/skeletons/CurrentSkeleton'
+import DailySkeleton from './components/skeletons/DailySkeleton'
+import HourlySkeleton from './components/skeletons/HourlySkeleton'
+import AdditionalInfoSkeleton from './components/skeletons/AdditionalInfoSkeleton'
 
 function App() {
 
@@ -27,17 +30,10 @@ function App() {
     lon: geoCodeData?.results?.[0]?.longitude ?? coordinates.lon
   }
 
-  const { data } = useSuspenseQuery({
-    queryKey: ['weather', coords.lat, coords.lon],
-    queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon })
-  })
-
   const onMapClick = (lat, lon) => {
     setCoords({lat, lon});
     setLocation('custom')
   }
-
-  
 
   return (
     <div className='flex flex-col gap-8'>
@@ -62,18 +58,18 @@ function App() {
       </div>
 
       <Suspense fallback={<CurrentSkeleton />} >
-        <CurrentWeather coords={coords} timeZone={data?.timezone} />
+        <CurrentWeather coords={coords} />
       </Suspense>
 
-      <Suspense fallback={<CurrentSkeleton />}>
+      <Suspense fallback={<DailySkeleton />}>
         <HourlyForecast coords={coords} />
       </Suspense>
 
-      <Suspense fallback={<CurrentSkeleton />}>
+      <Suspense fallback={<HourlySkeleton />}>
         <DailyForecast coords={coords} />
       </Suspense>
 
-      <Suspense fallback={<CurrentSkeleton />}>
+      <Suspense fallback={<AdditionalInfoSkeleton />}>
         <AdditionalInfo coords={coords} />
       </Suspense>
     

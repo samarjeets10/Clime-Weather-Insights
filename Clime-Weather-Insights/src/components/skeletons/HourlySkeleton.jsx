@@ -1,8 +1,21 @@
 import React from 'react'
+import { Skeleton } from '../ui/skeleton'
+import Card from '../cards/Card'
 
 function HourlySkeleton() {
   return (
-    <div>HourlySkeleton</div>
+    <Card title="Hourly Forecast (48 Hours)" childrenClassName="flex flex-row gap-6 overflow-x-scroll">
+        {
+          Array.from({length: 48}).map((index) => (
+              <div key={index} className='flex flex-col items-center gap-2 p-2'>
+                <Skeleton className='w-15 h-6' />
+                <Skeleton className='size-8' />
+                <Skeleton className='w-8 h-6' />
+              </div>
+            )
+          )
+        }
+    </Card>
   )
 }
 
