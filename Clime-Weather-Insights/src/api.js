@@ -1,3 +1,4 @@
+import { airPollutionSchema } from "./schemas/airPollutionSchema";
 import { geocodeSchema } from "./schemas/geoCodeSchema";
 import { weatherSchema } from "./schemas/weatherSchemas";
 const API_KEY = import.meta.env.VITE_API_KEY;
@@ -71,4 +72,23 @@ export async function getGeoCode(location) {
       throw Error(`Something went wrong! ${error.message}`, {cause: error})
     }
 
+}
+
+export async function getAirPollution({ lat, lon }) {
+    try {
+
+      const url = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+
+      const resp = await fetch(url);
+
+      if (!resp.ok) {
+        throw new Error(`Air Pollotion API returns ${resp.status}`);
+      }
+
+      const data = await resp.json();
+      return airPollutionSchema.parse(data);
+
+    } catch (error) {
+      throw Error(`Something went wrong! ${error.message}`, {cause: error});
+    }
 }
