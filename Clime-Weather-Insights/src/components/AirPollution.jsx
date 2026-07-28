@@ -3,6 +3,12 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import Card from './cards/Card';
 import { Slider } from '@base-ui/react';
 import clsx from 'clsx';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import Information from '../assets/information.svg?react'
 
 function AirPollution({ coords }) {
 
@@ -63,7 +69,19 @@ function AirPollution({ coords }) {
         <h1 className='text-5xl font-semibold'>
             {data.list[0].main.aqi}
         </h1>
-         <h1 className='text-2xl font-semibold'>AQI</h1>
+        
+        <div className='flex items-center gap-2'>
+            <h1 className='text-2xl font-semibold'>AQI</h1>
+            <Tooltip>
+                <TooltipTrigger>
+                    <Information className='size-4 invert cursor-pointer' />
+                </TooltipTrigger>
+                <TooltipContent className='z-2000'>
+                    <p>Add to cart</p>
+                </TooltipContent>
+            </Tooltip>
+        </div>
+         
         {
             Object.entries(data.list[0].components).filter(([key]) => airQualityRanges[key.toUpperCase()]).map(([key, value]) => {
 
