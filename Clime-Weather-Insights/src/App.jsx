@@ -14,12 +14,14 @@ import DailySkeleton from './components/skeletons/DailySkeleton'
 import HourlySkeleton from './components/skeletons/HourlySkeleton'
 import AdditionalInfoSkeleton from './components/skeletons/AdditionalInfoSkeleton'
 import SidePanel from './components/SidePanel'
+import Menu from './assets/menu-svgrepo-com.svg?react'
 
 function App() {
 
   const [coordinates, setCoords] = useState({lat: 16, lon: 74});
   const [location, setLocation] = useState('Mumbai');
   const [mapType, setMapType] = useState('clouds_new');
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(true);
 
   const { data: geoCodeData } = useSuspenseQuery({
     queryKey: ['geocode', location],
@@ -50,6 +52,9 @@ function App() {
             <h1 className='text-2xl font-semibold'>Map Type:</h1>
             <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
           </div>
+          <button onClick={() => setIsSidePanelOpen(true)}>
+            <Menu className='size-8 cursor-pointer invert ml-auto' />
+          </button>
         </div>
 
         <div className='relative'>
@@ -61,11 +66,11 @@ function App() {
           <CurrentWeather coords={coords} />
         </Suspense>
 
-        <Suspense fallback={<DailySkeleton />}>
+        <Suspense fallback={<HourlySkeleton />}>
           <HourlyForecast coords={coords} />
         </Suspense>
 
-        <Suspense fallback={<HourlySkeleton />}>
+        <Suspense fallback={<DailySkeleton />}>
           <DailyForecast coords={coords} />
         </Suspense>
 
@@ -74,7 +79,7 @@ function App() {
         </Suspense>
       </div>
 
-      <SidePanel coords={coords} />
+      <SidePanel coords={coords} isSidePanelOpen={isSidePanelOpen} setIsSidePanelOpen={setIsSidePanelOpen} />
     </>
   )
 }
