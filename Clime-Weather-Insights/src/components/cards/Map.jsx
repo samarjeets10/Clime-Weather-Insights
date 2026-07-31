@@ -14,7 +14,7 @@ function Map({ coords, onMapClick, mapType }) {
     center={[lat, lon]} 
     zoom={5} 
     scrollWheelZoom={true} 
-    style={{ width: "100%", height: "400px"}}>
+    style={{ width: "100%", height: "100%"}}>
       <MapTileLayer />
 
       <TileLayer opacity={0.6} key={mapType} url={`https://tile.openweathermap.org/map/${mapType}/{z}/{x}/{y}.png?appid=${API_KEY}`} />

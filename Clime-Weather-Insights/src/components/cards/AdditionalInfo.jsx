@@ -58,10 +58,10 @@ function AdditionalInfo({ coords }) {
     ];
 
   return (
-    <Card title="Additional Weather Info" childrenClassName="flex flex-col gap-8">
+    <Card title="Additional Weather Info" childrenClassName="grid grid-cols-1 md:grid-cols-2 gap-8">
         {
             rows.map(({label, value, type, Icon}) => (
-                <div key={label} className='flex justify-between'>
+                <div key={label} className='flex justify-between items-center bg-sidebar-accent p-2 rounded-lg'>
                     <div className='flex items-center gap-4'>
                         <span className='text-gray-500'>{label}</span>
                         <Icon className='size-8 invert' />

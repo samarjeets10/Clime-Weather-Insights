@@ -6,9 +6,9 @@ import SidePanelSkeleton from './skeletons/SidePanelSkeleton'
 
 function SidePanel({ coords, isSidePanelOpen, setIsSidePanelOpen }) {
   return (
-    <div className={clsx('fixed top-0 right-0 h-screen w-90 shadow-md bg-sidebar z-1000 py-8 px-4 overflow-y-scroll transition-transform duration-300', isSidePanelOpen ? 'translate-x-0' : 'translate-x-full')}>
+    <div className={clsx('fixed top-0 right-0 h-screen w-(--sidebar-width) shadow-md bg-sidebar z-1000 py-8 px-4 overflow-y-scroll transition-transform duration-300 lg:translate-x-0', isSidePanelOpen ? 'translate-x-0!' : 'translate-x-full')}>
         <button onClick={() => setIsSidePanelOpen(false)}>
-          <ChevronLeft className='size-8 cursor-pointer invert -ml-2' />
+          <ChevronLeft className='size-8 cursor-pointer invert -ml-2 lg:hidden' />
         </button>
         <Suspense fallback={<SidePanelSkeleton />}>
             <AirPollution coords={coords} />

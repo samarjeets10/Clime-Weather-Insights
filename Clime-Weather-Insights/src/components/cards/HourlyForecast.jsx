@@ -13,7 +13,7 @@ function HourlyForecast({ coords }) {
     const hourly = data?.hourly;
 
   return (
-    <Card title="Hourly Forecast (48 Hours)" childrenClassName="flex flex-row gap-6 overflow-x-scroll">
+    <Card title="Hourly Forecast (48 Hours)" childrenClassName="flex flex-row gap-6 overflow-x-scroll overflow-y-visible">
         {
            hourly?.time?.map((hour, index) => {
             
