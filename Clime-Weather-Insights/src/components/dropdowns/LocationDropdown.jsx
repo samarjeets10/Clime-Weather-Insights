@@ -27,7 +27,7 @@ function LocationDropdown({ location, setLocation }) {
 
   return (
     <Select value={location} onValueChange={(value) => setLocation(value)} >
-    <SelectTrigger className="w-full xs:w-[180px]">
+    <SelectTrigger className="w-full xs:w-[140px]">
         <SelectValue placeholder="Theme" />
     </SelectTrigger>
     <SelectContent className="z-[1000]">

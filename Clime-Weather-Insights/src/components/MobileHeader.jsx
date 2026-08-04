@@ -4,7 +4,7 @@ import LightDarkToggle from "./LightDarkToggle"
 function MobileHeader({ setIsSidePanelOpen }) {
   return (
     <div className='w-full h-16 p-4 bg-background sticky top-0 xs:hidden flex justify-between z-1000'>
-        <h1 className="text-foreground font-bold text-3xl">Clime</h1>
+        <h1 className="text-foreground whitespace-nowrap font-bold text-2xl xs:text-3xl">Clime Weather</h1>
 
          <div className="flex items-center gap-2">
             <LightDarkToggle />

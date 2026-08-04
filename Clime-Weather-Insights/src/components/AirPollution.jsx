@@ -76,7 +76,7 @@ function AirPollution({ coords }) {
                 <TooltipTrigger className='cursor-pointer'>
                     <Information className='size-4' />
                 </TooltipTrigger>
-                <TooltipContent className="z-[200000] w-75">
+                <TooltipContent className="w-75">
                     <p> Possible values: 1, 2, 3, 4, 5. Where 1 = Good, 2 = Fair, 3 = Moderate, 4 = Poor, 5 = Very Poor.</p>
                 </TooltipContent>
             </Tooltip>

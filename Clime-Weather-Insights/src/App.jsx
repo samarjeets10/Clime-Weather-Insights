@@ -48,27 +48,25 @@ function App() {
 
           <div className='flex flex-col gap-4 items-center justify-between xs:flex-row xs:gap-8'>
 
-            <div className='hidden whitespace-nowrap w-full lg:block'>
+            {/* <div className='hidden md:block'>
               <h1 className='text-3xl font-bold'>Clime Weather</h1>
-            </div>
+            </div> */}
             
-            <div className='flex flex-col w-full md:flex-row gap-2 md:gap-4'>
+            <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
               <h1 className='text-xl font-semibold'>Location: </h1>
               <LocationDropdown location={location} setLocation={setLocation} />
             </div>
 
-            <div className='flex flex-col w-full md:flex-row gap-2 md:gap-4'>
+            <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
               <h1 className='text-xl font-semibold whitespace-nowrap'>Map type:</h1>
               <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
             </div>
 
             {/* toggle and menu */}
             <div className='ml-auto flex gap-4 items-center'>
-              <div className='hidden xs:block'>
-                <LightDarkToggle />
-              </div>
+              <LightDarkToggle />
               <button onClick={() => setIsSidePanelOpen(true)} className='hidden xs:block'>
-                <Menu className='size-8 cursor-pointer lg:hidden' />
+                <Menu className='size-8 cursor-pointer invert lg:hidden' />
               </button>
             </div>
 
