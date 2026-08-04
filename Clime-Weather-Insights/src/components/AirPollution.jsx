@@ -73,11 +73,11 @@ function AirPollution({ coords }) {
         <div className='flex items-center gap-2'>
             <h1 className='text-2xl font-semibold'>AQI</h1>
             <Tooltip>
-                <TooltipTrigger className='cursor-pointer'>
-                    <Information className='size-4 cursor-pointer' />
+                <TooltipTrigger className='cursor-pointer invert'>
+                    <Information className='size-4' />
                 </TooltipTrigger>
-                <TooltipContent className="z-2000">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, dolor!</p>
+                <TooltipContent className="z-[7000] w-80">
+                    <p> Possible values: 1, 2, 3, 4, 5. Where 1 = Good, 2 = Fair, 3 = Moderate, 4 = Poor, 5 = Very Poor.</p>
                 </TooltipContent>
             </Tooltip>
         </div>

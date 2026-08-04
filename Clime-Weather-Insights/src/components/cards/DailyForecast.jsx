@@ -13,7 +13,7 @@ function DailyForecast({ coords }) {
   const daily = data?.daily;
 
   return (
-    <Card title="Daily Forecast" childrenClassName="flex flex-col gap-4">
+    <Card title="Daily Forecast" childrenClassName="flex flex-col gap-4 2xl:justify-between">
         {daily?.time?.map((date, index) => {
           const code = daily?.weather_code?.[index];
           const info = WeatherIcons(code);

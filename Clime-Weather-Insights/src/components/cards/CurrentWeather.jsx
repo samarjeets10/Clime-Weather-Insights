@@ -24,8 +24,8 @@ function CurrentWeather({ timeZone, coords }) {
 
     
   return (
-    <Card title="Current Weather" className='md:pb-10' childrenClassName="flex flex-col items-center justify-center gap-6">
-        <div className='flex flex-col items-center gap-3'>
+    <Card title="Current Weather" className='md:pb-10' childrenClassName="flex flex-col items-center justify-center gap-6 2xl:justify-between">
+        <div className='flex flex-col items-center justify-between gap-4 2xl:gap-6'>
             <h2 className='text-6xl font-semibold text-center'>{Math.round(current?.temperature_2m)}°C</h2>
             <span>{info.icon}</span>
             <h3 className='text-xl capitalize'>{info.label}</h3>

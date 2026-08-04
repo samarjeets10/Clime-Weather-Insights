@@ -1,16 +1,15 @@
-import React from 'react'
 import { Skeleton } from '../ui/skeleton'
 import Card from '../cards/Card'
 
 function HourlySkeleton() {
   return (
-    <Card title="Hourly Forecast (48 Hours)" childrenClassName="flex flex-row gap-6 overflow-x-scroll">
+    <Card title="Hourly Forecast (48 Hours)" childrenClassName="flex flex-row gap-6 overflow-x-scroll overflow-y-visible">
         {
           Array.from({length: 48}).map((index) => (
-              <div key={index} className='flex flex-col items-center gap-2 p-2'>
-                <Skeleton className='w-15 h-6' />
-                <Skeleton className='size-8' />
-                <Skeleton className='w-8 h-6' />
+              <div key={index} className='flex flex-col items-center gap-2 p-2 2xl:justify-between'>
+                <Skeleton className='w-15 h-6 2xl:scale-110' />
+                <Skeleton className='size-8 2xl:size-110 rounded-full' />
+                <Skeleton className='w-8 h-6 2xl:scale-110' />
               </div>
             )
           )

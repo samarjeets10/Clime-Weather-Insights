@@ -27,10 +27,10 @@ function HourlyForecast({ coords }) {
             });
 
             return (
-                <div className='flex flex-col items-center gap-2 p-2'>
-                    <p className='whitespace-nowrap'>{time}</p>
+                <div className='flex flex-col items-center gap-8 p-2 2xl:justify-between'>
+                    <p className='whitespace-nowrap 2xl:scale-110'>{time}</p>
                     <div>{info.icon}</div>
-                    <p>{temp}°C</p>
+                    <p className='2xl:scale-110'>{temp}°C</p>
                 </div>
             )
            })

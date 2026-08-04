@@ -2,8 +2,8 @@ import Card from '../cards/Card'
 import { Skeleton } from '../ui/skeleton'
 function CurrentSkeleton() {
   return (
-    <Card title="Current Weather" childrenClassName="flex flex-col items-center gap-6">
-        <div className='flex flex-col items-center gap-3'>
+    <Card title="Current Weather" childrenClassName="flex flex-col items-center justify-center gap-6 2xl:justify-between">
+        <div className='flex flex-col items-center justify-between gap-4 2xl:gap-6'>
             <Skeleton className='w-30 h-15' />
             <Skeleton className='size-14 rounded-full' />
             <Skeleton className='w-36 h-7' />
