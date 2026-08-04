@@ -8,7 +8,7 @@ function HourlySkeleton() {
           Array.from({length: 48}).map((index) => (
               <div key={index} className='flex flex-col items-center gap-2 p-2 2xl:justify-between'>
                 <Skeleton className='w-15 h-6 2xl:scale-110' />
-                <Skeleton className='size-8 2xl:size-110 rounded-full' />
+                <Skeleton className='size-8 rounded-full' />
                 <Skeleton className='w-8 h-6 2xl:scale-110' />
               </div>
             )

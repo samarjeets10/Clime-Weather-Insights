@@ -16,6 +16,7 @@ import AdditionalInfoSkeleton from './components/skeletons/AdditionalInfoSkeleto
 import SidePanel from './components/SidePanel'
 import Menu from './assets/menu-svgrepo-com.svg?react'
 import MobileHeader from './components/MobileHeader'
+import LightDarkToggle from './components/LightDarkToggle'
 
 function App() {
 
@@ -41,23 +42,36 @@ function App() {
 
   return (
     <>
-
       <MobileHeader setIsSidePanelOpen={setIsSidePanelOpen} />
+      
       <div className='flex flex-col gap-8 p-8 pt-6 xs:pt-8 w-full lg:w-[calc(100dvw_-_var(--sidebar-width))] min-h-0 2xl:h-auto'>
 
-          <div className='flex flex-col gap-4 justify-between xs:flex-row xs:gap-8'>
-            <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
+          <div className='flex flex-col gap-4 items-center justify-between xs:flex-row xs:gap-8'>
+
+            <div className='hidden whitespace-nowrap w-full lg:block'>
+              <h1 className='text-3xl font-bold'>Clime Weather</h1>
+            </div>
+            
+            <div className='flex flex-col w-full md:flex-row gap-2 md:gap-4'>
               <h1 className='text-xl font-semibold'>Location: </h1>
               <LocationDropdown location={location} setLocation={setLocation} />
             </div>
 
-            <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
+            <div className='flex flex-col w-full md:flex-row gap-2 md:gap-4'>
               <h1 className='text-xl font-semibold whitespace-nowrap'>Map type:</h1>
               <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
             </div>
-            <button onClick={() => setIsSidePanelOpen(true)} className='hidden xs:block'>
-              <Menu className='size-8 cursor-pointer invert ml-auto lg:hidden' />
-            </button>
+
+            {/* toggle and menu */}
+            <div className='ml-auto flex gap-4 items-center'>
+              <div className='hidden xs:block'>
+                <LightDarkToggle />
+              </div>
+              <button onClick={() => setIsSidePanelOpen(true)} className='hidden xs:block'>
+                <Menu className='size-8 cursor-pointer lg:hidden' />
+              </button>
+            </div>
+
           </div>
 
           <div className="grid grid-cols-1 2xl:flex-1 2xl:min-h-0 md:grid-cols-2 2xl:grid-cols-4 gap-4">

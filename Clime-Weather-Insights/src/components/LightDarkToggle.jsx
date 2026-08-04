@@ -1,0 +1,19 @@
+import { Switch } from "@/components/ui/switch"
+import Sun from '../assets/sun.svg?react'
+import Moon from '../assets/moon.svg?react'
+import { useTheme } from "./ThemeProvider"
+
+function LightDarkToggle() {
+
+    const {theme, toggleTheme} = useTheme()
+
+  return (
+    <div className='flex items-center gap-2'>
+        <Sun className='size-6' />
+        <Switch checked={theme === 'dark'} onCheckedChange={toggleTheme} />
+        <Moon className='size-6' />
+    </div>
+  )
+}
+
+export default LightDarkToggle

@@ -64,7 +64,7 @@ function AdditionalInfo({ coords }) {
                 <div key={label} className='flex justify-between items-center bg-sidebar-accent p-2 rounded-lg'>
                     <div className='flex items-center gap-4'>
                         <span className='text-gray-500'>{label}</span>
-                        <Icon className='size-8 invert' />
+                        <Icon className='size-8' />
                     </div>
                     <span>
                         <FormatComponent value={value} type={type} />

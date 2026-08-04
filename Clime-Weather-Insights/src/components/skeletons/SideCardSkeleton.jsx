@@ -10,13 +10,13 @@ function SideCardSkeleton() {
         <div className='flex justify-between'>
             <div className="flex items-center gap-2">
                 <Skeleton className='w-12 h-7 bg-sidebar' />
-                <Skeleton className='w-12 h-7 bg-sidebar' />
+                <Skeleton className='w-12 h-7 dark:bg-sidebar' />
             </div>
         </div>
-        <Skeleton className='w-full h-1.5 bg-sidebar' />
+        <Skeleton className='w-full h-1.5 dark:bg-sidebar' />
         <div className='flex justify-between text-xs'>
-            <Skeleton className='w-6 h-4 bg-sidebar'/>
-            <Skeleton className='w-6 h-4 bg-sidebar'/>
+            <Skeleton className='w-6 h-4 dark:bg-sidebar'/>
+            <Skeleton className='w-6 h-4 dark:bg-sidebar'/>
         </div>
         <div className='flex justify-between gap-4'>
             {
