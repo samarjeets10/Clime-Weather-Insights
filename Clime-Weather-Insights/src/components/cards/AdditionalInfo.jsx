@@ -5,8 +5,11 @@ import Card from './Card'
  import Pressure from '../../assets/pressure.svg?react'
  import Wind from '../../assets/wind.svg?react'
  import Uv from '../../assets/uv.svg?react'
+ import WindGustIcon from '../../assets/windgust.svg?react'
+ import Eye from '../../assets/eye.svg?react'
  import { useSuspenseQuery } from '@tanstack/react-query'
  import { getWeather } from '@/api'
+ import { getMetricSubtext, FormatComponent } from '../../utils/WeatherUtil'
 
 
 function AdditionalInfo({ coords }) {
@@ -18,9 +21,12 @@ function AdditionalInfo({ coords }) {
 
     const current = data?.current;
     const daily = data?.daily;
+    const hourly = data?.hourly;
     
     const sunrise = daily?.sunrise[0];
     const sunset = daily?.sunset[0]; 
+    const visibilityKm = hourly?.visibility?.[0] != null ? (hourly.visibility[0] / 1000).toFixed(1) : undefined;
+
 
     const rows = [
         { 
@@ -55,20 +61,33 @@ function AdditionalInfo({ coords }) {
             type: "time",
             Icon: Sunset
         },
+        { 
+            label: "Wind Gusts (km/h)", value: current?.wind_gusts_10m,
+            type: "number",
+            Icon: WindGustIcon
+        },
+        { 
+            label: "Visibility (km)", value: visibilityKm,
+            type: "text",
+            Icon: Eye
+        },
     ];
 
   return (
-    <Card title="Additional Weather Info" childrenClassName="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <Card title="Additional Weather Info" childrenClassName="grid grid-cols-2 md:grid-cols-4 gap-6">
         {
             rows.map(({label, value, type, Icon}) => (
-                <div key={label} className='flex justify-between items-center bg-sidebar-accent p-2 rounded-lg'>
-                    <div className='flex items-center gap-4'>
-                        <span className='text-gray-500'>{label}</span>
-                        <Icon className='size-8' />
+                <div key={value} className='p-4 flex flex-col gap-8 bg-accent border shadow-sm dark:border-none rounded-xl'>
+                    <div className='flex justify-between items-center gap-4'>
+                        <Icon className='size-6' />
+                        <p className='text-gray-400'>{label}</p>
                     </div>
-                    <span>
-                        <FormatComponent value={value} type={type} />
-                    </span>
+                    <div className='flex flex-col gap-2'>
+                       <h2 className='text-3xl font-bold'>
+                            <FormatComponent value={value} type={type} />
+                       </h2>
+                       <p className='text-xs font-semibold text-muted-forground leading-relaxed'>{getMetricSubtext(label, value)}</p>
+                    </div>
                 </div>
             ))
         }
@@ -77,19 +96,19 @@ function AdditionalInfo({ coords }) {
 }
 
 
-function FormatComponent({value, type}) {
-
-    if (value === undefined || value === null) return '--';
-        
-    if (type === 'time') {
-        return new Date(value).toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
-        })
-    }
-
-    return value;
-}
+// function FormatComponent({value, type}) {
+// 
+//     if (value === undefined || value === null) return '--';
+//         
+//     if (type === 'time') {
+//         return new Date(value).toLocaleTimeString('en-US', {
+//             hour: '2-digit',
+//             minute: '2-digit',
+//             hour12: true
+//         })
+//     }
+// 
+//     return value;
+// }
 
 export default AdditionalInfo

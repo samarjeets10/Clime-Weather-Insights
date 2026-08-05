@@ -47,10 +47,6 @@ function App() {
       <div className='flex flex-col gap-8 p-8 pt-6 xs:pt-8 w-full lg:w-[calc(100dvw_-_var(--sidebar-width))] min-h-0 2xl:h-auto'>
 
           <div className='flex flex-col gap-4 items-center justify-between xs:flex-row xs:gap-8'>
-
-            {/* <div className='hidden md:block'>
-              <h1 className='text-3xl font-bold'>Clime Weather</h1>
-            </div> */}
             
             <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
               <h1 className='text-xl font-semibold'>Location: </h1>

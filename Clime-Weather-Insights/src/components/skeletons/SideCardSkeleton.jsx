@@ -20,8 +20,8 @@ function SideCardSkeleton() {
         </div>
         <div className='flex justify-between gap-4'>
             {
-                Array.from({ length: 5 }).map((index) => (
-                    <Skeleton key={index} className='w-15 h-6 bg-sidebar' />
+                Array.from({ length: 5 }).map((_, index) => (
+                    <Skeleton key={`side-card-skeleton-${index}`} className='w-15 h-6 bg-sidebar' />
                 ))
             }
         </div>

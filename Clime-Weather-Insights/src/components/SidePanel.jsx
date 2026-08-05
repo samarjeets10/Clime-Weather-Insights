@@ -3,6 +3,7 @@ import AirPollution from './AirPollution'
 import clsx from 'clsx'
 import ChevronLeft from '../assets/chevron.svg?react'
 import SidePanelSkeleton from './skeletons/SidePanelSkeleton'
+import UVIndex from './UVIndex'
 
 function SidePanel({ coords, isSidePanelOpen, setIsSidePanelOpen }) {
   return (
@@ -13,6 +14,11 @@ function SidePanel({ coords, isSidePanelOpen, setIsSidePanelOpen }) {
         <Suspense fallback={<SidePanelSkeleton />}>
             <AirPollution coords={coords} />
         </Suspense>
+        <div className='mt-6'>
+          <Suspense fallback={<SidePanelSkeleton />}>
+            <UVIndex coords={coords} />
+          </Suspense>
+        </div>
     </div>
   )
 }
