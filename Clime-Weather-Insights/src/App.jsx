@@ -17,6 +17,9 @@ import SidePanel from './components/SidePanel'
 import Menu from './assets/menu-svgrepo-com.svg?react'
 import MobileHeader from './components/MobileHeader'
 import LightDarkToggle from './components/LightDarkToggle'
+import TempChart from './components/charts/TempChart'
+import PrecpitationChart from './components/charts/PrecpitationChart'
+import Logo from './assets/png/clime-logo.png'
 
 function App() {
 
@@ -46,54 +49,79 @@ function App() {
       
       <div className='flex flex-col gap-8 p-8 pt-6 xs:pt-8 w-full lg:w-[calc(100dvw_-_var(--sidebar-width))] min-h-0 2xl:h-auto'>
 
-          <div className='flex flex-col gap-4 items-center justify-between xs:flex-row xs:gap-8'>
-            
-            <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
-              <h1 className='text-xl font-semibold'>Location: </h1>
-              <LocationDropdown location={location} setLocation={setLocation} />
+        <div className='w-full flex flex-col gap-6'>
+
+          <div className='hidden xs:flex items-center gap-2'>
+            <img src={Logo} alt="logo" className='size-8' />
+            <h1 className='text-3xl font-bold'>Clime</h1>
+          </div>
+
+          <div className='flex flex-col gap-4 w-full xs:flex-row xs:items-center xs:justify-between xs:gap-8'>
+
+            <div className='flex flex-col gap-2 w-full xs:flex-row xs:items-center xs:gap-6 xs:w-auto'>
+              <div className='flex flex-col w-full md:flex-row gap-2 md:gap-4 xs:w-auto'>
+                <h1 className='text-xl font-semibold'>Location: </h1>
+                <LocationDropdown location={location} setLocation={setLocation} />
+              </div>
+
+              <div className='flex flex-col w-full md:flex-row gap-2 md:gap-4 xs:w-auto'>
+                <h1 className='text-xl font-semibold whitespace-nowrap'>Map type:</h1>
+                <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
+              </div>
             </div>
 
-            <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
-              <h1 className='text-xl font-semibold whitespace-nowrap'>Map type:</h1>
-              <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
-            </div>
-
-            {/* toggle and menu */}
-            <div className='ml-auto flex gap-4 items-center'>
-              <LightDarkToggle />
+            <div className='flex gap-4 items-center shrink-0'>
+              <div className='hidden xs:block'>
+                <LightDarkToggle />
+              </div>
               <button onClick={() => setIsSidePanelOpen(true)} className='hidden xs:block'>
-                <Menu className='size-8 cursor-pointer invert lg:hidden' />
+                <Menu className='size-8 cursor-pointer lg:hidden' />
               </button>
             </div>
 
           </div>
 
-          <div className="grid grid-cols-1 2xl:flex-1 2xl:min-h-0 md:grid-cols-2 2xl:grid-cols-4 gap-4">
-            <div className="relative h-120 2xl:h-150 col-span-1 md:col-span-2 2xl:col-span-4 2xl:row-span-2 order-1">
-              <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
-              <MapLegend mapType={mapType} />
-            </div>
-            <div className="col-span-1 2xl:row-span-2 order-2">
-              <Suspense fallback={<CurrentSkeleton />}>
-                <CurrentWeather coords={coords} />
-              </Suspense>
-            </div>
-            <div className="col-span-1 order-3 2xl:order-4 2xl:row-span-2">
-              <Suspense fallback={<DailySkeleton />}>
-                <DailyForecast coords={coords} />
-              </Suspense>
-            </div>
-            <div className="col-span-1 md:col-span-2 2xl:row-span-1 order-4 2xl:order-3">
-              <Suspense fallback={<HourlySkeleton />}>
-                <HourlyForecast coords={coords} />
-              </Suspense>
-            </div>
-            <div className="col-span-1 md:col-span-2 2xl:row-span-1 order-5">
-              <Suspense fallback={<AdditionalInfoSkeleton />}>
-                <AdditionalInfo coords={coords} />
-              </Suspense>
-            </div>
+        </div>
+
+        <div className="grid grid-cols-1 2xl:flex-1 2xl:min-h-0 md:grid-cols-2 2xl:grid-cols-4 gap-4">
+          <div className="relative h-120 2xl:h-150 col-span-1 md:col-span-2 2xl:col-span-4 2xl:row-span-2 order-1">
+            <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
+            <MapLegend mapType={mapType} />
           </div>
+          <div className="col-span-1 2xl:row-span-2 order-2">
+            <Suspense fallback={<CurrentSkeleton />}>
+              <CurrentWeather coords={coords} />
+            </Suspense>
+          </div>
+          <div className="col-span-1 order-3 2xl:order-4 2xl:row-span-2">
+            <Suspense fallback={<DailySkeleton />}>
+              <DailyForecast coords={coords} />
+            </Suspense>
+          </div>
+          <div className="col-span-1 md:col-span-2 2xl:row-span-1 order-4 2xl:order-3">
+            <Suspense fallback={<HourlySkeleton />}>
+              <HourlyForecast coords={coords} />
+            </Suspense>
+          </div>
+          <div className="col-span-1 md:col-span-2 2xl:row-span-1 order-5">
+            <Suspense fallback={<AdditionalInfoSkeleton />}>
+              <AdditionalInfo coords={coords} />
+            </Suspense>
+          </div>
+
+          <div className="col-span-1 2xl:col-span-2 order-6 2xl:h-64">
+            <Suspense fallback={<div className='h-64 rounded-xl bg-card animate-pulse' />}>
+              <TempChart coords={coords} />
+            </Suspense>
+          </div>
+
+          <div className='col-span-1 2xl:col-span-2 order-7 2xl:h-64'>
+            <Suspense fallback={<div className='h-64 rounded-xl bg-card animate-pulse' />}>
+              <PrecpitationChart coords={coords} />
+            </Suspense>
+          </div>
+          
+        </div>
 
       </div>
 

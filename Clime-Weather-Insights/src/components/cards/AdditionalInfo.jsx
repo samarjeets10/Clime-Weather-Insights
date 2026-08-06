@@ -95,20 +95,4 @@ function AdditionalInfo({ coords }) {
   )
 }
 
-
-// function FormatComponent({value, type}) {
-// 
-//     if (value === undefined || value === null) return '--';
-//         
-//     if (type === 'time') {
-//         return new Date(value).toLocaleTimeString('en-US', {
-//             hour: '2-digit',
-//             minute: '2-digit',
-//             hour12: true
-//         })
-//     }
-// 
-//     return value;
-// }
-
 export default AdditionalInfo
