@@ -47,7 +47,7 @@ function App() {
     <>
       <MobileHeader setIsSidePanelOpen={setIsSidePanelOpen} />
       
-      <div className='flex flex-col gap-8 p-8 pt-6 xs:pt-8 w-full lg:w-[calc(100dvw_-_var(--sidebar-width))] min-h-0 2xl:h-auto'>
+      <div className='flex flex-col gap-8 p-8 pt-6 xs:pt-8 w-full lg:w-[calc(100dvw-var(--sidebar-width))] min-h-0 2xl:h-auto'>
 
         <div className='w-full flex flex-col gap-6'>
 
